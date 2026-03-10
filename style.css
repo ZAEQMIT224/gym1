@@ -510,4 +510,50 @@ footer {
         justify-content: center;
         margin: 0;
     }
+    @media (max-width: 768px) {
+    /* 1. Force the entire Hero section into a vertical column */
+    .hero {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; /* Centers items horizontally */
+        padding-top: 140px; /* Keeps it clear of the navbar */
+        padding-bottom: 50px;
+    }
+
+    /* 2. Center-align the text and button */
+    .hero-content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .hero-title, .hero-subtitle {
+        text-align: center;
+    }
+
+    .hero-actions {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* 3. Drag the stats down and stack them */
+    .hero-stats {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 40px; /* Adds space between the calculate button and the cards */
+        gap: 15px;
+        position: relative; /* Overrides any desktop positioning */
+    }
+
+    .stat-card {
+        width: 90%; /* Makes the cards fit the mobile screen nicely */
+        max-width: 350px;
+        justify-content: center; /* Centers the star/dumbbell icon and text inside the card */
+    }
+}
 }
