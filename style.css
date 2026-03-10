@@ -487,26 +487,69 @@ footer {
     }
 
     /* 2. Fix the weird right-aligned floating cards */
-    .hero-stats {
-        position: relative !important;
+    @media (max-width: 768px) {
+    /* 1. Force the entire Hero section into a single vertical column */
+    .hero-content, 
+    .hero-container,
+    .hero .container,
+    .hero .grid-2 {
         display: flex !important;
-        flex-direction: column !important; /* Stacks the cards vertically */
+        flex-direction: column !important;
         align-items: center !important;
-        justify-content: center !important;
-        width: 100% !important;
-        margin-top: 40px !important;
-        right: auto !important;
-        left: auto !important;
-        transform: none !important;
-        gap: 15px !important;
+        text-align: center !important;
     }
 
-    /* 3. Make the cards uniform and centered */
+    /* 2. Center the text and buttons */
+    .hero-text {
+        width: 100% !important;
+        margin-bottom: 40px !important;
+    }
+    
+    .hero-actions {
+        justify-content: center !important;
+    }
+
+    /* 3. Bring the stats back on screen and stack them */
+    @media (max-width: 768px) {
+    /* 1. Force the entire Hero section into a single vertical column */
+    .hero-content, 
+    .hero-container,
+    .hero .container,
+    .hero .grid-2 {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    /* 2. Center the text and buttons */
+    .hero-text {
+        width: 100% !important;
+        margin-bottom: 40px !important;
+    }
+    
+    .hero-actions {
+        justify-content: center !important;
+    }
+
+    /* 3. Bring the stats back on screen and stack them */
+    .hero-stats {
+        position: relative !important; /* Removes it if it was floating/absolute */
+        right: auto !important;
+        top: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 350px !important;
+        margin: 0 auto !important; 
+        gap: 15px !important;
+        transform: none !important; /* Kills any weird desktop positioning */
+    }
+
     .stat-card {
         width: 100% !important;
-        max-width: 280px !important; /* Prevents them from being too wide */
-        justify-content: flex-start !important; /* Keeps icon and text looking neat */
-        margin: 0 auto !important;
+        justify-content: center !important;
+        margin: 0 !important;
     }
 }
 @media (max-width: 768px) {
@@ -516,17 +559,49 @@ footer {
     .hero-actions { flex-direction: column; width: 100%; }
     
     /* ADD THESE LINES TO FIX THE STAT CARDS */
-    .hero-stats { 
-        flex-direction: column; 
-        align-items: center; 
-        width: 100%;
-        gap: 10px;
-    }
-    .stat-card {
-        width: 100%;
-        max-width: 300px;
-        justify-content: center;
+    @media (max-width: 768px) {
+    /* 1. Force the entire Hero section into a single vertical column */
+    .hero-content, 
+    .hero-container,
+    .hero .container,
+    .hero .grid-2 {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
     }
 
+    /* 2. Center the text and buttons */
+    .hero-text {
+        width: 100% !important;
+        margin-bottom: 40px !important;
+    }
+    
+    .hero-actions {
+        justify-content: center !important;
+    }
+
+    /* 3. Bring the stats back on screen and stack them */
+    .hero-stats {
+        position: relative !important; /* Removes it if it was floating/absolute */
+        right: auto !important;
+        top: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 350px !important;
+        margin: 0 auto !important; 
+        gap: 15px !important;
+        transform: none !important; /* Kills any weird desktop positioning */
+    }
+
+    .stat-card {
+        width: 100% !important;
+        justify-content: center !important;
+        margin: 0 !important;
+    }
+}
+
     .nav-links.active { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(11, 11, 11, 0.95); padding: 20px; text-align: center; }
+}
 }
