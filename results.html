@@ -70,6 +70,48 @@
         .compare-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; z-index: 4; cursor: col-resize; }
         .compare-handle { position: absolute; top: 0; left: 50%; width: 4px; height: 100%; background: var(--accent); z-index: 3; transform: translateX(-50%); pointer-events: none; }
         .compare-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: var(--bg-primary); border: 2px solid var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(255, 59, 59, 0.5); }
+        /* --- Mobile Responsive Navbar --- */
+        .hamburger { display: none; font-size: 1.5rem; color: #fff; cursor: pointer; }
+        
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-links { 
+                display: none; /* Hide links by default on mobile */
+            }
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%; left: 0; width: 100%;
+                background: rgba(11, 11, 11, 0.95);
+                backdrop-filter: blur(15px);
+                padding: 20px 0;
+                text-align: center;
+                gap: 20px;
+                border-bottom: 1px solid var(--glass-border);
+            }
+            /* Make the logo a bit smaller on mobile so it fits better */
+            .logo { font-size: 1.2rem; }
+        }
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            /* The !important tag forces the browser to obey this rule */
+            .nav-links, .nav-buttons { display: none !important; }
+            
+            .nav-links.active {
+                display: flex !important;
+                flex-direction: column;
+                position: absolute;
+                top: 100%; left: 0; width: 100%;
+                background: rgba(11, 11, 11, 0.95);
+                backdrop-filter: blur(15px);
+                padding: 20px 0;
+                text-align: center;
+                gap: 20px;
+                border-bottom: 1px solid var(--glass-border);
+            }
+            .logo { font-size: 1.2rem; }
+        }
     </style>
 </head>
 <body>
@@ -82,11 +124,13 @@
             <a href="index.html" class="logo"><i class="fas fa-dumbbell"></i> TFR <span>CENTER</span></a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="squad.html">The Squad</a></li>
-                <li><a href="results.html" style="color: var(--accent);">Results</a></li>
+                <li><a href="squad.html" style="color: var(--accent);">The Squad</a></li>
+                <li><a href="results.html">Results</a></li>
                 <li><a href="index.html#tools" class="highlight-link"><i class="fas fa-calculator"></i> Tools</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
             </ul>
+            
+            <div class="hamburger"><i class="fas fa-bars"></i></div>
+            
         </div>
     </nav>
 
@@ -120,7 +164,27 @@
                     </div>
                 </div>
             </div>
-            
+            <div class="grid-2">
+                <div class="glass-panel" data-aos="fade-up">
+                    <h3 style="margin-bottom: 15px;">Fat Loss Program: -12kg in 4 Months</h3>
+                    <div class="compare-container">
+                        <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=800&auto=format&fit=crop" class="compare-img compare-before" alt="Before">
+                        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=800&auto=format&fit=crop" class="compare-img compare-after" alt="After">
+                        <input type="range" min="0" max="100" value="50" class="compare-slider">
+                        <div class="compare-handle"><div class="compare-btn"><i class="fas fa-arrows-alt-h"></i></div></div>
+                    </div>
+                </div>
+
+                <div class="glass-panel" data-aos="fade-up" data-aos-delay="100">
+                    <h3 style="margin-bottom: 15px;">Hypertrophy: +8kg Muscle Mass</h3>
+                    <div class="compare-container">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop" class="compare-img compare-before" alt="Before">
+                        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=800&auto=format&fit=crop" class="compare-img compare-after" alt="After">
+                        <input type="range" min="0" max="100" value="50" class="compare-slider">
+                        <div class="compare-handle"><div class="compare-btn"><i class="fas fa-arrows-alt-h"></i></div></div>
+                    </div>
+                </div>
+            </div>
             <div style="text-align: center; margin-top: 80px;" data-aos="fade-up">
                 <h3 style="margin-bottom: 20px;">Ready to start your journey?</h3>
                 <a href="index.html#contact" class="btn btn-primary">START TODAY</a>
@@ -171,6 +235,15 @@
                 handle.style.left = `${value}%`;
             });
         });
+        // --- Mobile Menu Toggle ---
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if(hamburger) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
     </script>
 </body>
 </html>

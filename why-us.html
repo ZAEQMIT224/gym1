@@ -139,25 +139,66 @@
         .glass-panel p { color: var(--text-sec); font-size: 0.95rem; }
 
         footer { text-align: center; padding: 30px 0; border-top: 1px solid var(--glass-border); color: var(--text-sec); font-size: 0.8rem; margin-top: 50px; }
+        /* --- Mobile Responsive Navbar --- */
+        .hamburger { display: none; font-size: 1.5rem; color: #fff; cursor: pointer; }
+        
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav-links, .nav-buttons { 
+                display: none; /* Hide links and buttons by default on mobile */
+            }
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%; left: 0; width: 100%;
+                background: rgba(11, 11, 11, 0.95);
+                backdrop-filter: blur(15px);
+                padding: 20px 0;
+                text-align: center;
+                gap: 20px;
+                border-bottom: 1px solid var(--glass-border);
+            }
+            /* Make the logo a bit smaller on mobile */
+            .logo { font-size: 1.2rem; }
+        }
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            /* The !important tag forces the browser to obey this rule */
+            .nav-links, .nav-buttons { display: none !important; }
+            
+            .nav-links.active {
+                display: flex !important;
+                flex-direction: column;
+                position: absolute;
+                top: 100%; left: 0; width: 100%;
+                background: rgba(11, 11, 11, 0.95);
+                backdrop-filter: blur(15px);
+                padding: 20px 0;
+                text-align: center;
+                gap: 20px;
+                border-bottom: 1px solid var(--glass-border);
+            }
+            .logo { font-size: 1.2rem; }
+        }
     </style>
 </head>
 <body>
     <div class="cursor-glow"></div>
     <div class="cursor-dot"></div>
 
-    <nav class="navbar" id="navbar">
+    <nav class="navbar scrolled" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo"><i class="fas fa-dumbbell"></i> TFR <span>CENTER</span></a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="why-us.html" style="color: var(--accent);">Why Us</a></li>
-                <li><a href="squad.html">The Squad</a></li>
+                <li><a href="squad.html" style="color: var(--accent);">The Squad</a></li>
                 <li><a href="results.html">Results</a></li>
-                <li><a href="index.html#tools"><i class="fas fa-calculator"></i> Tools</a></li>
+                <li><a href="index.html#tools" class="highlight-link"><i class="fas fa-calculator"></i> Tools</a></li>
             </ul>
-            <div class="nav-buttons">
-                <a href="checkout.html?plan=Standard Membership" class="btn btn-outline">JOIN NOW</a>
-            </div>
+            
+            <div class="hamburger"><i class="fas fa-bars"></i></div>
+            
         </div>
     </nav>
 
@@ -274,6 +315,15 @@
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeModal();
         });
+        // --- Mobile Menu Toggle ---
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if(hamburger) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
     </script>
 </body>
 </html>
