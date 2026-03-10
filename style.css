@@ -538,22 +538,33 @@ footer {
         justify-content: center;
         width: 100%;
     }
-
-    /* 3. Drag the stats down and stack them */
+    /* Force the hero layout to be a single vertical column */
+    .hero .container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+    /* --- KILL ABSOLUTE POSITIONING AND CENTER THE STATS --- */
     .hero-stats {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        margin-top: 40px; /* Adds space between the calculate button and the cards */
-        gap: 15px;
-        position: relative; /* Overrides any desktop positioning */
+        position: relative !important; /* Removes it from the right edge */
+        display: flex !important;
+        flex-direction: column !important; /* Stacks cards top to bottom */
+        align-items: center !important;
+        width: 100% !important;
+        margin-top: 40px !important; /* Adds space between button and cards */
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        gap: 15px !important;
     }
 
     .stat-card {
-        width: 90%; /* Makes the cards fit the mobile screen nicely */
-        max-width: 350px;
-        justify-content: center; /* Centers the star/dumbbell icon and text inside the card */
+        width: 100% !important;
+        max-width: 280px !important; /* Keeps them looking sleek and not stretched */
+        justify-content: center !important;
+        text-align: center !important;
+        margin: 0 !important;
     }
 }
 }
