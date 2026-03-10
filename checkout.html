@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | The Fitness Revolution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Montserrat:wght@500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Base Setup --- */
+        :root {
+            --bg-primary: #0B0B0B; --bg-secondary: #121212;
+            --accent: #FF3B3B; --accent-sec: #FF6B6B;
+            --glass-bg: rgba(255, 255, 255, 0.05); --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #FFFFFF; --text-sec: #BFBFBF;
+            --font-heading: 'Montserrat', sans-serif; --font-body: 'Inter', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-primary); color: var(--text-main); font-family: var(--font-body); display: flex; flex-direction: column; min-height: 100vh; }
+        
+        /* --- Navbar --- */
+        .navbar { padding: 20px 0; background: rgba(11, 11, 11, 0.9); border-bottom: 1px solid var(--glass-border); text-align: center; }
+        .logo { font-family: var(--font-heading); font-size: 1.5rem; color: #fff; text-decoration: none; font-weight: 900; }
+        .logo i { color: var(--accent); margin-right: 5px; }
+        .logo span { font-weight: 300; color: var(--text-sec); }
+
+        /* --- Checkout Container --- */
+        .checkout-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+        .checkout-card { background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 40px; text-align: center; max-width: 450px; width: 100%; box-shadow: 0 10px 50px rgba(255, 59, 59, 0.1); border-top: 3px solid var(--accent); }
+        
+        .checkout-card h2 { font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 5px; text-transform: uppercase; }
+        .selected-plan { color: var(--accent-sec); font-weight: 700; font-size: 1.1rem; margin-bottom: 25px; }
+        
+        /* --- Form Inputs --- */
+        .input-group { margin-bottom: 15px; }
+        .input-group input { width: 100%; padding: 12px 15px; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--glass-border); border-radius: 8px; color: #fff; font-family: var(--font-body); outline: none; transition: border 0.3s; }
+        .input-group input:focus { border-color: var(--accent); }
+        
+        /* --- QR Box --- */
+        .qr-box { background: #fff; padding: 10px; border-radius: 12px; margin: 20px auto; width: 180px; height: 180px; display: flex; align-items: center; justify-content: center; }
+        .qr-box img { width: 100%; height: auto; }
+        
+        .instructions { color: var(--text-sec); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5; }
+        
+        /* --- Buttons --- */
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 30px; font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; border-radius: 8px; transition: all 0.3s ease; width: 100%; cursor: pointer; }
+        .btn-primary { background: linear-gradient(90deg, var(--accent), var(--accent-sec)); color: #fff; border: none; box-shadow: 0 4px 15px rgba(255, 59, 59, 0.4); }
+        .btn-primary:hover { box-shadow: 0 6px 25px rgba(255, 59, 59, 0.6); transform: translateY(-2px); }
+        .btn-back { margin-top: 20px; color: var(--text-sec); text-decoration: none; font-size: 0.9rem; display: inline-block; transition: color 0.3s; }
+        .btn-back:hover { color: #fff; }
+
+        footer { text-align: center; padding: 20px; border-top: 1px solid var(--glass-border); color: var(--text-sec); font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo"><i class="fas fa-dumbbell"></i> TFR <span>CENTER</span></a>
+    </nav>
+
+    <div class="checkout-wrapper">
+        <div class="checkout-card">
+            <h2>Activate Membership</h2>
+            <p class="selected-plan" id="display-plan">Selected Plan: Standard</p>
+            
+            <div class="input-group">
+                <input type="text" id="member-name" placeholder="Your Full Name" required>
+            </div>
+            <div class="input-group">
+                <input type="tel" id="member-phone" placeholder="Your Phone Number" required>
+            </div>
+            
+            <div class="qr-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" alt="UPI QR Code" style="filter: invert(1);">
+            </div>
+            
+            <p class="instructions">
+                1. Enter your details above.<br>
+                2. Scan and pay using GPay, PhonePe, or Paytm.<br>
+                3. Click below to send us the screenshot.
+            </p>
+            
+            <button id="whatsapp-submit" class="btn btn-primary">
+                <i class="fab fa-whatsapp" style="margin-right: 10px; font-size: 1.4rem;"></i> Send Screenshot
+            </button>
+            <p id="error-msg" style="color: #FF3B3B; display: none; margin-top: 10px; font-size: 0.85rem; font-weight: 500;">Please fill in your name and phone number.</p>
+            
+            <br>
+            <a href="index.html#membership" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Plans</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 The Fitness Revolution. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Grab the ?plan= parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const plan = urlParams.get('plan') || "Custom Plan";
+        
+        // Display the plan on the page
+        document.getElementById('display-plan').innerText = `Selected Plan: ${plan}`;
+
+        // Handle the WhatsApp logic
+        document.getElementById('whatsapp-submit').addEventListener('click', function() {
+            const name = document.getElementById('member-name').value.trim();
+            const phone = document.getElementById('member-phone').value.trim();
+            const errorMsg = document.getElementById('error-msg');
+
+            // Form validation
+            if (name === "" || phone === "") {
+                errorMsg.style.display = "block";
+                return;
+            }
+            errorMsg.style.display = "none";
+
+            // Create the dynamic message
+            const message = `Hi! I just made a payment for my gym membership.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Plan:* ${plan}\n\nHere is my screenshot:`;
+            
+            // Encode the message so it works in a URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Redirect to WhatsApp
+            const waUrl = `https://wa.me/919733071972?text=${encodedMessage}`;
+            window.open(waUrl, '_blank');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformations | The Fitness Revolution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Montserrat:wght@500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* --- Base Setup --- */
+        :root {
+            --bg-primary: #0B0B0B; --bg-secondary: #121212;
+            --accent: #FF3B3B; --accent-sec: #FF6B6B;
+            --glass-bg: rgba(255, 255, 255, 0.05); --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #FFFFFF; --text-sec: #BFBFBF;
+            --font-heading: 'Montserrat', sans-serif; --font-body: 'Inter', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; cursor: none; }
+        body { background-color: var(--bg-primary); color: var(--text-main); font-family: var(--font-body); overflow-x: hidden; line-height: 1.6; }
+        
+        /* --- Custom Cursor --- */
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
+        .cursor-glow { width: 40px; height: 40px; border: 1px solid var(--accent-sec); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background 0.2s; }
+        .cursor-hover { width: 60px; height: 60px; background: rgba(255, 59, 59, 0.1); }
+
+        /* --- Typography & Layout --- */
+        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 800; }
+        .text-gradient { background: linear-gradient(90deg, var(--accent), var(--accent-sec)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section { padding: 100px 0; }
+        .bg-darker { background-color: var(--bg-secondary); }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        /* --- UI Elements --- */
+        .glass-panel { background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 30px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); }
+        .btn { display: inline-block; padding: 14px 30px; font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; text-decoration: none; border-radius: 8px; cursor: none; transition: all 0.3s ease; text-align: center; }
+        .btn-primary { background: linear-gradient(90deg, var(--accent), var(--accent-sec)); color: #fff; border: none; box-shadow: 0 4px 15px rgba(255, 59, 59, 0.4); }
+        .btn-primary:hover { box-shadow: 0 6px 25px rgba(255, 59, 59, 0.6); transform: scale(1.02); }
+        .btn-outline { background: transparent; color: #fff; border: 1px solid var(--accent); }
+        .btn-outline:hover { background: var(--accent); color: #fff; }
+
+        /* --- Navbar & Footer --- */
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 0; z-index: 1000; transition: all 0.4s ease; }
+        .navbar.scrolled { padding: 15px 0; background: rgba(11, 11, 11, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-heading); font-size: 1.5rem; color: #fff; text-decoration: none; letter-spacing: 1px; }
+        .logo i { color: var(--accent); margin-right: 5px; }
+        .logo span { font-weight: 300; color: var(--text-sec); }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; position: relative; padding-bottom: 5px; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; background: var(--accent); transition: width 0.3s ease; }
+        .nav-links a:hover::after { width: 100%; }
+        .highlight-link { color: var(--accent) !important; font-weight: 700 !important; }
+        .highlight-link::after { display: none; }
+        .floating-wa { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 100; text-decoration: none; transition: transform 0.3s ease; }
+        footer { background: #050505; padding: 30px 0; border-top: 1px solid var(--glass-border); text-align: center; color: var(--text-sec); font-size: 0.8rem; }
+
+        /* --- Before & After Slider Specific UI --- */
+        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-header h2 { font-size: 3rem; text-transform: uppercase; line-height: 1.1; margin-bottom: 15px; }
+        .section-header p { color: var(--text-sec); font-size: 1.1rem; }
+        
+        .compare-container { position: relative; width: 100%; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 12px; cursor: col-resize; }
+        .compare-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        .compare-before { z-index: 1; }
+        .compare-after { z-index: 2; clip-path: inset(0 50% 0 0); }
+        .compare-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; z-index: 4; cursor: col-resize; }
+        .compare-handle { position: absolute; top: 0; left: 50%; width: 4px; height: 100%; background: var(--accent); z-index: 3; transform: translateX(-50%); pointer-events: none; }
+        .compare-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: var(--bg-primary); border: 2px solid var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(255, 59, 59, 0.5); }
+    </style>
+</head>
+<body>
+    <div class="cursor-glow"></div>
+    <div class="cursor-dot"></div>
+    <a href="https://wa.me/919733071972" target="_blank" class="floating-wa"><i class="fab fa-whatsapp"></i></a>
+
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fas fa-dumbbell"></i> TFR <span>CENTER</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="squad.html">The Squad</a></li>
+                <li><a href="results.html" style="color: var(--accent);">Results</a></li>
+                <li><a href="index.html#tools" class="highlight-link"><i class="fas fa-calculator"></i> Tools</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section bg-darker" style="padding-top: 150px; padding-bottom: 50px;">
+        <div class="container section-header" data-aos="fade-up">
+            <h2>REAL PEOPLE. <br><span>REAL RESULTS.</span></h2>
+            <p>Drag the slider to see the transformations achieved through our programs.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="grid-2">
+                <div class="glass-panel" data-aos="fade-up">
+                    <h3 style="margin-bottom: 15px;">Fat Loss Program: -12kg in 4 Months</h3>
+                    <div class="compare-container">
+                        <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=800&auto=format&fit=crop" class="compare-img compare-before" alt="Before">
+                        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=800&auto=format&fit=crop" class="compare-img compare-after" alt="After">
+                        <input type="range" min="0" max="100" value="50" class="compare-slider">
+                        <div class="compare-handle"><div class="compare-btn"><i class="fas fa-arrows-alt-h"></i></div></div>
+                    </div>
+                </div>
+
+                <div class="glass-panel" data-aos="fade-up" data-aos-delay="100">
+                    <h3 style="margin-bottom: 15px;">Hypertrophy: +8kg Muscle Mass</h3>
+                    <div class="compare-container">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop" class="compare-img compare-before" alt="Before">
+                        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=800&auto=format&fit=crop" class="compare-img compare-after" alt="After">
+                        <input type="range" min="0" max="100" value="50" class="compare-slider">
+                        <div class="compare-handle"><div class="compare-btn"><i class="fas fa-arrows-alt-h"></i></div></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 80px;" data-aos="fade-up">
+                <h3 style="margin-bottom: 20px;">Ready to start your journey?</h3>
+                <a href="index.html#contact" class="btn btn-primary">START TODAY</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 The Fitness Revolution. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // --- Init Scroll Animations ---
+        AOS.init({ once: true, offset: 100, duration: 800, easing: 'ease-out-cubic' });
+
+        // --- Custom Cursor Logic ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorGlow = document.querySelector('.cursor-glow');
+        window.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorGlow.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+        });
+        document.querySelectorAll('a, button, input').forEach(el => {
+            el.addEventListener('mouseenter', () => cursorGlow.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => cursorGlow.classList.remove('cursor-hover'));
+        });
+
+        // --- Navbar Scroll ---
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+
+        // --- Interactive Slider Logic ---
+        const compareContainers = document.querySelectorAll('.compare-container');
+        compareContainers.forEach(container => {
+            const slider = container.querySelector('.compare-slider');
+            const afterImg = container.querySelector('.compare-after');
+            const handle = container.querySelector('.compare-handle');
+
+            slider.addEventListener('input', (e) => {
+                const value = e.target.value;
+                afterImg.style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+                handle.style.left = `${value}%`;
+            });
+        });
+    </script>
+</body>
+</html>
