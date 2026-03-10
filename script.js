@@ -1,5 +1,11 @@
 // --- Initialize Scroll Animations (AOS) ---
-AOS.init({ once: true, offset: 100, duration: 800, easing: 'ease-out-cubic' });
+AOS.init({ 
+    once: true, 
+    offset: 100, 
+    duration: 800, 
+    easing: 'ease-out-cubic',
+    disable: window.innerWidth < 768 // This kills animations on mobile!
+});
 
 // --- Initialize 3D Tilt Cards ---
 VanillaTilt.init(document.querySelectorAll(".tilt-card"), { max: 15, speed: 400, glare: true, "max-glare": 0.2 });
