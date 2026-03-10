@@ -240,9 +240,11 @@ h1, h2, h3, h4 {
 .hero {
     min-height: 100vh;
     display: flex;
+    flex-direction: column; /* THIS IS THE MAGIC FIX: Stacks items top to bottom natively */
+    justify-content: center;
     align-items: center;
     position: relative;
-    padding: 120px 20px 0;
+    padding: 120px 20px 40px;
     overflow: hidden;
     background: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
 }
@@ -261,8 +263,8 @@ h1, h2, h3, h4 {
     position: relative;
     z-index: 3;
     max-width: 800px;
-    margin: 0 auto;
     text-align: center;
+    width: 100%;
 }
 .hero-title {
     font-size: 4.5rem;
@@ -278,38 +280,37 @@ h1, h2, h3, h4 {
 .hero-actions {
     display: flex;
     justify-content: center;
-    gap: 5px;
-    margin-bottom: 60px;
+    gap: 15px;
 }
 .hero-stats {
     position: relative;
     z-index: 3;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap; /* Allows wrapping if screen shrinks */
     gap: 20px;
     width: 100%;
-    margin-top: 40px;
+    max-width: 800px;
+    margin-top: 60px;
 }
 .stat-card {
     display: flex;
     align-items: center;
     gap: 15px;
     padding: 15px 25px;
+    min-width: 250px;
 }
 .stat-card i { font-size: 1.5rem; }
 .stat-card h4 { font-size: 1.2rem; }
 .stat-card p { font-size: 0.8rem; color: var(--text-sec); }
 
 /* Floating Animation */
-.floating {
-    animation: float 4s ease-in-out infinite;
-}
+.floating { animation: float 4s ease-in-out infinite; }
 @keyframes float {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-15px); }
     100% { transform: translateY(0px); }
 }
-
 /* --- Services (Tilt Cards) --- */
 .tilt-card {
     transform-style: preserve-3d;
@@ -446,125 +447,59 @@ footer {
 .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; color: var(--text-sec); font-size: 0.8rem;}
 
 /* --- Mobile Responsive --- */
+/* --- Mobile Responsive --- */
 @media (max-width: 992px) {
     .hero-title { font-size: 3.5rem; }
     .premium-card { transform: scale(1); }
-    .hero-stats { flex-direction: column; align-items: center; }
 }
 
 @media (max-width: 768px) {
     /* Navbar */
-    .nav-links, .nav-buttons { display: none; }
+    .nav-links, .nav-buttons { display: none !important; }
     .hamburger { display: block; }
     
     /* Mobile Menu Active State */
     .nav-links.active { 
-        display: flex; 
+        display: flex !important; 
         flex-direction: column; 
         position: absolute; 
         top: 100%; 
         left: 0; 
         width: 100%; 
-        background: rgba(11, 11, 11, 0.95); 
-        padding: 20px; 
+        background: rgba(11, 11, 11, 0.98); 
+        padding: 20px 0; 
         text-align: center; 
+        border-bottom: 1px solid var(--glass-border);
     }
 
     /* Hero Section Fix */
     .hero {
-        flex-direction: column; /* This forces the cards to sit under the text */
-        justify-content: center;
         padding-top: 120px;
     }
 
     .hero-content {
-        text-align: center;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        padding: 0 15px;
     }
 
     .hero-title { 
-        font-size: 2.5rem; 
-    }
-    
-    .hero-actions { 
-        flex-direction: column; 
-        width: 100%; 
+        font-size: 2.8rem; 
     }
 
-    /* Bring the stats back on screen and stack them */
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    /* Bring the stats back on screen and stack them cleanly */
     .hero-stats {
-        position: relative; 
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        max-width: 350px;
-        margin: 40px auto 0; 
+        flex-direction: column; /* Stacks the cards vertically! */
+        align-items: center;
+        margin-top: 40px;
         gap: 15px;
     }
 
     .stat-card {
         width: 100%;
+        max-width: 300px;
         justify-content: center;
-        margin: 0;
     }
-    @media (max-width: 768px) {
-    /* 1. Force the entire Hero section into a vertical column */
-    .hero {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center; /* Centers items horizontally */
-        padding-top: 140px; /* Keeps it clear of the navbar */
-        padding-bottom: 50px;
-    }
-
-    /* 2. Center-align the text and button */
-    .hero-content {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-
-    .hero-title, .hero-subtitle {
-        text-align: center;
-    }
-
-    .hero-actions {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-    }
-    /* Force the hero layout to be a single vertical column */
-    .hero .container {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center !important;
-    }
-    /* --- KILL ABSOLUTE POSITIONING AND CENTER THE STATS --- */
-    .hero-stats {
-        position: relative !important; /* Removes it from the right edge */
-        display: flex !important;
-        flex-direction: column !important; /* Stacks cards top to bottom */
-        align-items: center !important;
-        width: 100% !important;
-        margin-top: 40px !important; /* Adds space between button and cards */
-        right: auto !important;
-        bottom: auto !important;
-        transform: none !important;
-        gap: 15px !important;
-    }
-
-    .stat-card {
-        width: 100% !important;
-        max-width: 280px !important; /* Keeps them looking sleek and not stretched */
-        justify-content: center !important;
-        text-align: center !important;
-        margin: 0 !important;
-    }
-}
 }
