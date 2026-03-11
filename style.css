@@ -450,27 +450,31 @@ footer {
 @media (max-width: 768px) {
     /* Navbar */
     .nav-links, .nav-buttons { display: none !important; }
-    .hamburger { display: block; }
+    .hamburger { display: block !important; }
     
     .nav-links.active { 
         display: flex !important; 
-        flex-direction: column; 
-        position: absolute; 
-        top: 100%; 
-        left: 0; 
-        width: 100%; 
-        background: rgba(11, 11, 11, 0.98); 
-        padding: 20px 0; 
-        text-align: center; 
-        border-bottom: 1px solid var(--glass-border);
+        flex-direction: column !important; 
+        position: absolute !important; 
+        top: 100% !important; 
+        left: 0 !important; 
+        width: 100% !important; 
+        background: rgba(11, 11, 11, 0.98) !important; 
+        padding: 20px 0 !important; 
+        text-align: center !important; 
+        border-bottom: 1px solid var(--glass-border) !important;
     }
 
-    /* Force the Hero Section to behave */
-   .hero {
+    /* 1. Stack the whole hero section: Text top, Stats bottom */
+    .hero {
+        display: flex !important;
         flex-direction: column !important;
-        padding-top: 150px !important; /* Make room for the mobile navbar */
+        padding-top: 130px !important; /* Make room for the mobile navbar */
+        padding-bottom: 50px !important;
         min-height: 100vh !important;
+        height: auto !important;
         justify-content: center !important;
+        align-items: center !important;
     }
 
     /* 2. Dead-center the text and the button */
@@ -480,33 +484,36 @@ footer {
         flex-direction: column !important;
         align-items: center !important;
         width: 100% !important;
+        padding: 0 15px !important;
         margin: 0 auto !important;
     }
 
-    .hero-title, .hero-subtitle {
-        text-align: center !important;
-    }
-    
-    /* 3. Pull the floating stats down under the button and stack them */
+    .hero-title { font-size: 2.5rem !important; text-align: center !important; }
+    .hero-subtitle { font-size: 1rem !important; text-align: center !important; margin-bottom: 30px !important; }
+    .hero-actions { display: flex !important; justify-content: center !important; width: 100% !important; }
+
+    /* 3. Pull the stats down under the button and stack them */
     .hero-stats {
-        position: relative !important; /* Kills the float that causes the cut-off */
+        position: static !important; /* Forces them into the normal flow, impossible to cut off */
         display: flex !important;
-        flex-direction: column !important; /* Stacks the two cards on top of each other */
+        flex-direction: column !important; /* Stacks the two cards */
         align-items: center !important;
-        margin-top: 40px !important; /* Pushes them safely below the red button */
+        justify-content: center !important;
+        margin-top: 40px !important; 
         width: 100% !important;
         gap: 15px !important;
-        right: auto !important;
-        top: auto !important;
         transform: none !important;
     }
 
-    /* 4. Make sure the cards fit the phone screen nicely */
-    .stat-card {
+    /* 4. Center the cards and kill the bouncing animation */
+    .hero-stats .stat-card, .floating {
         width: 100% !important;
         max-width: 300px !important;
+        display: flex !important;
         justify-content: center !important;
+        align-items: center !important;
         margin: 0 auto !important;
-        animation: none !important; /* Stops the floating bounce on mobile so it doesn't break the screen width */
+        animation: none !important; /* Kills the float so width doesn't glitch */
+        transform: none !important;
     }
 }
