@@ -68,6 +68,8 @@
         .social-links { display: flex; gap: 15px; margin-top: 10px; justify-content: center; }
         .social-links a { color: #fff; background: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
         .social-links a:hover { background: var(--accent); transform: translateY(-3px); }
+        /* --- Mobile Navbar Base --- */
+        .hamburger { display: none; font-size: 1.8rem; color: #fff; cursor: pointer; }
         @media (max-width: 768px) {
             .hamburger { display: block; }
             /* The !important tag forces the browser to obey this rule */
@@ -104,6 +106,9 @@
                 <li><a href="index.html#tools" class="highlight-link"><i class="fas fa-calculator"></i> Tools</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
+            
+            <div class="hamburger"><i class="fas fa-bars"></i></div>
+            
         </div>
     </nav>
 
@@ -179,6 +184,15 @@
             if (window.scrollY > 50) navbar.classList.add('scrolled');
             else navbar.classList.remove('scrolled');
         });
+        // --- Mobile Menu Toggle ---
+        const hamburgerBtn = document.querySelector('.hamburger');
+        const mobileNavLinks = document.querySelector('.nav-links');
+        
+        if(hamburgerBtn) {
+            hamburgerBtn.addEventListener('click', () => {
+                mobileNavLinks.classList.toggle('active');
+            });
+        }
     </script>
 </body>
 </html>
