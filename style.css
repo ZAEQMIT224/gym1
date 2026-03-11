@@ -446,19 +446,12 @@ footer {
 .social-links a:hover { background: var(--accent); transform: translateY(-3px); }
 .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; color: var(--text-sec); font-size: 0.8rem;}
 
-/* --- Mobile Responsive --- */
-/* --- Mobile Responsive --- */
-@media (max-width: 992px) {
-    .hero-title { font-size: 3.5rem; }
-    .premium-card { transform: scale(1); }
-}
-
+/* --- THE ULTIMATE MOBILE FIX --- */
 @media (max-width: 768px) {
     /* Navbar */
     .nav-links, .nav-buttons { display: none !important; }
     .hamburger { display: block; }
     
-    /* Mobile Menu Active State */
     .nav-links.active { 
         display: flex !important; 
         flex-direction: column; 
@@ -472,34 +465,44 @@ footer {
         border-bottom: 1px solid var(--glass-border);
     }
 
-    /* Hero Section Fix */
+    /* Force the Hero Section to behave */
     .hero {
-        padding-top: 120px;
+        flex-direction: column !important;
+        justify-content: center !important;
+        padding-top: 140px !important;
+        padding-bottom: 60px !important;
+        height: auto !important;
+        min-height: 100vh !important;
     }
 
     .hero-content {
-        padding: 0 15px;
+        width: 100% !important;
+        padding: 0 15px !important;
+        margin: 0 auto !important;
     }
 
-    .hero-title { 
-        font-size: 2.8rem; 
-    }
+    .hero-title { font-size: 2.8rem !important; }
+    .hero-subtitle { font-size: 1rem !important; margin-bottom: 30px !important; }
 
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-
-    /* Bring the stats back on screen and stack them cleanly */
+    /* The actual fix for the sliding cards */
     .hero-stats {
-        flex-direction: column; /* Stacks the cards vertically! */
-        align-items: center;
-        margin-top: 40px;
-        gap: 15px;
+        display: flex !important;
+        flex-direction: column !important; /* Forces top-to-bottom stacking */
+        align-items: center !important;
+        width: 100% !important;
+        margin: 40px auto 0 auto !important;
+        padding: 0 20px !important;
+        box-sizing: border-box !important;
+        gap: 15px !important;
     }
 
-    .stat-card {
-        width: 100%;
-        max-width: 300px;
-        justify-content: center;
+    .hero-stats .stat-card {
+        width: 100% !important;
+        max-width: 300px !important;
+        margin: 0 !important;
+        justify-content: center !important;
+        /* Kills the floating animation on mobile so it doesn't break the screen width */
+        animation: none !important; 
+        transform: none !important;
     }
 }
