@@ -466,43 +466,47 @@ footer {
     }
 
     /* Force the Hero Section to behave */
-    .hero {
+   .hero {
         flex-direction: column !important;
-        justify-content: center !important;
-        padding-top: 140px !important;
-        padding-bottom: 60px !important;
-        height: auto !important;
+        padding-top: 150px !important; /* Make room for the mobile navbar */
         min-height: 100vh !important;
+        justify-content: center !important;
     }
 
+    /* 2. Dead-center the text and the button */
     .hero-content {
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
         width: 100% !important;
-        padding: 0 15px !important;
         margin: 0 auto !important;
     }
 
-    .hero-title { font-size: 2.8rem !important; }
-    .hero-subtitle { font-size: 1rem !important; margin-bottom: 30px !important; }
-
-    /* The actual fix for the sliding cards */
+    .hero-title, .hero-subtitle {
+        text-align: center !important;
+    }
+    
+    /* 3. Pull the floating stats down under the button and stack them */
     .hero-stats {
+        position: relative !important; /* Kills the float that causes the cut-off */
         display: flex !important;
-        flex-direction: column !important; /* Forces top-to-bottom stacking */
+        flex-direction: column !important; /* Stacks the two cards on top of each other */
         align-items: center !important;
+        margin-top: 40px !important; /* Pushes them safely below the red button */
         width: 100% !important;
-        margin: 40px auto 0 auto !important;
-        padding: 0 20px !important;
-        box-sizing: border-box !important;
         gap: 15px !important;
+        right: auto !important;
+        top: auto !important;
+        transform: none !important;
     }
 
-    .hero-stats .stat-card {
+    /* 4. Make sure the cards fit the phone screen nicely */
+    .stat-card {
         width: 100% !important;
         max-width: 300px !important;
-        margin: 0 !important;
         justify-content: center !important;
-        /* Kills the floating animation on mobile so it doesn't break the screen width */
-        animation: none !important; 
-        transform: none !important;
+        margin: 0 auto !important;
+        animation: none !important; /* Stops the floating bounce on mobile so it doesn't break the screen width */
     }
 }

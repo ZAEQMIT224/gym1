@@ -234,3 +234,20 @@ footer { background: #050505; padding: 60px 0 20px; border-top: 1px solid var(--
     .hero-actions { flex-direction: column; }
     .nav-links.active { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(11, 11, 11, 0.95); padding: 20px; text-align: center; }
 }
+/* --- FORCE STAT CARDS TO STACK ON MOBILE --- */
+    .hero-stats {
+        display: flex !important;
+        flex-direction: column !important; /* Stacks them top-to-bottom */
+        align-items: center !important;
+        width: 100% !important;
+        gap: 15px !important;
+        padding: 0 20px !important;
+        box-sizing: border-box !important;
+    }
+
+    .stat-card {
+        width: 100% !important; /* Makes it shrink to fit the phone screen */
+        max-width: 320px !important;
+        justify-content: center !important;
+        margin: 0 auto !important;
+    }
