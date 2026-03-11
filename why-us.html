@@ -268,7 +268,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // --- Init Scroll Animations ---
-        AOS.init({ once: true, offset: 100, duration: 800, easing: 'ease-out-cubic' });
+        AOS.init({ once: true, offset: 100, duration: 800, easing: 'ease-out-cubic',disable: window.innerWidth < 768 });
 
         // --- Custom Cursor Logic ---
         const cursorDot = document.querySelector('.cursor-dot');
