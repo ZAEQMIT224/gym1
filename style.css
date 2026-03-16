@@ -466,6 +466,81 @@ footer {
 }
 .social-links a:hover { background: var(--accent); transform: translateY(-3px); }
 .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; color: var(--text-sec); font-size: 0.8rem;}
+/* --- Expanding Accordion Gallery Fix --- */
+.expanding-gallery {
+    display: flex;
+    flex-direction: row; /* FORCES side-by-side vertical pills */
+    align-items: stretch; /* Makes them stretch to full height */
+    width: 100%;
+    height: 500px; /* Taller height for a more premium look */
+    gap: 15px;
+}
+
+.expand-panel {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 60px; /* Creates the tight pill shape */
+    flex: 1; /* Squeezes inactive items into narrow pillars */
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Apple-style spring easing */
+    cursor: none; /* Keeps your custom cursor active */
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end; /* Pushes text to the bottom */
+    justify-content: center;
+    padding-bottom: 40px;
+}
+
+.expand-panel.active {
+    flex: 6; /* Expands the active item to be very wide */
+    border-radius: 30px; /* Relaxes the corners when expanded */
+}
+
+.panel-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* Dark gradient at the bottom so white text is always readable */
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%);
+    z-index: 1;
+    transition: opacity 0.5s;
+}
+
+/* Dim inactive panels slightly to make the active one pop */
+.expand-panel:not(.active) .panel-overlay {
+    background: rgba(0,0,0,0.5); 
+}
+
+.panel-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    white-space: nowrap; /* Prevents text from breaking into multiple lines */
+}
+
+/* Only show text when the panel is fully expanded */
+.expand-panel.active .panel-content {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s; /* Slight delay feels more organic */
+}
+
+.panel-content h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0px;
+    color: #fff;
+    line-height: 1;
+}
+
+.panel-content p {
+    font-size: 1.1rem;
+    color: var(--text-sec);
+    margin-top: 5px;
+}
 
 /* --- THE ULTIMATE MOBILE FIX --- */
 /* --- THE ULTIMATE MOBILE FIX --- */
